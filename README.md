@@ -38,6 +38,39 @@ This project uses an MQ-3 alcohol sensor with an Arduino UNO to detect alcohol p
 - If **no alcohol is detected**:
   - LED & Buzzer remain OFF
   - Serial Monitor shows `"No ALCOHOL detected."`
+  - 
+** **CODE**
+    int LED = 9;  
+int BUZZER = 10;   
+int ALCOHOL_sensor = 3; // MQ-3 Sensor DOUT connected here
+int ALCOHOL_detected;  
+
+void setup()  
+{  
+  Serial.begin(9600);  
+  pinMode(LED, OUTPUT);  
+  pinMode(BUZZER, OUTPUT);  
+  pinMode(ALCOHOL_sensor, INPUT);  
+}  
+
+void loop()  
+{  
+  ALCOHOL_detected = digitalRead(ALCOHOL_sensor);  
+  Serial.println(ALCOHOL_detected);  
+
+  if (ALCOHOL_detected == 1)  
+  {  
+    Serial.println("ALCOHOL detected...");  
+    digitalWrite(LED, HIGH);  
+    digitalWrite(BUZZER, HIGH);  
+  }  
+  else  
+  {  
+    Serial.println("No ALCOHOL detected.");  
+    digitalWrite(LED, LOW);  
+    digitalWrite(BUZZER, LOW);  
+  }  
+}
 
 ---
 
